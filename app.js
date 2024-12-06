@@ -8,42 +8,63 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Base de datos simulada
-let alumnos = [
+let users = [
     {
-        id: 1,
-        nombre: 'Juan Pérez',
-        edad: 20,
-        carrera: 'Ingeniería Informática',
-        promedio: 8.5
+        id_user: 1,
+        nombre: 'Laia',
+        apellidop: 'Nieves',
+        apellidom: 'Luna',
+        nocasa: 1,
+        correo: 'lainilu@gmail.com',
+        password: '123456',
+        telcasa: "4491572244",
+        cel: "4491572244"
+    },
+    {
+        id_user: 2,
+        nombre: 'Fernando',
+        apellidop: 'Rojas',
+        apellidom: 'Ruiz',
+        nocasa: 2,
+        correo: 'ferouz@gmail.com',
+        password: 'hola12',
+        telcasa: "4491572275",
+        cel: "44915448215"
+    },
+    {
+        id_user: 3,
+        nombre: 'Perla',
+        apellidop: 'Sanchez',
+        apellidom: 'Lopez',
+        nocasa: 2,
+        correo: 'perlasa@hotmail.com',
+        password: 'perla123',
+        telcasa: "4491572244",
+        cel: "4491572244"
     }
 ];
 
-// Endpoint GET para obtener la lista de alumnos
-app.get('/alumnos', (req, res) => {
-    res.json(alumnos);
+// Endpoint GET para obtener la lista de users
+app.get('/users', (req, res) => {
+    res.json(users);
 });
 
-// Endpoint POST para agregar un alumno
-app.post('/alumnos', (req, res) => {
-    const { id, nombre, edad, carrera, promedio } = req.body;
+// Endpoint POST para recibir usuario y contraseña
+app.post('/users/login', (req, res) => {
+    const { id_user, password } = req.body; // Extraemos usuario y password del cuerpo de la solicitud
 
-    // Validación básica
-    if (!id || !nombre || !edad || !carrera || promedio === undefined) {
-        return res.status(400).json({ mensaje: 'Faltan datos del alumno (id, nombre, edad, carrera, promedio).' });
+    // Buscar el usuario en la lista de usuarios
+    const user = users.find(u => u.usuario === usuario && u.password === password);
+
+    if (user) {
+        // Si el usuario y la contraseña coinciden, devolvemos la información completa
+        res.json(user);
+    } else {
+        // Si no se encuentra el usuario o la contraseña es incorrecta
+        res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
     }
-
-    // Verificar si el alumno ya existe
-    const alumnoExistente = alumnos.find(alumno => alumno.id === id);
-    if (alumnoExistente) {
-        return res.status(400).json({ mensaje: 'El alumno con este ID ya existe.' });
-    }
-
-    // Agregar el nuevo alumno
-    const nuevoAlumno = { id, nombre, edad, carrera, promedio };
-    alumnos.push(nuevoAlumno);
-
-    res.status(201).json({ mensaje: 'Alumno agregado correctamente.', alumno: nuevoAlumno });
 });
+
 
 // Iniciar el servidor
 app.listen(port, () => {
