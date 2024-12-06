@@ -63,8 +63,8 @@ app.post('/users/login', (req, res) => {
 
     // Compara las contraseñas (sin cifrado, solo para probar)
     if (user.password === password) {
-        // Si las contraseñas coinciden, devolvemos la información del usuario
-        res.json({
+        // Si las contraseñas coinciden, devolvemos solo la información del usuario
+        return res.json({
             id_usuario: user.id_usuario,
             nombre: user.nombre,
             apellido_pat: user.apellido_pat,
