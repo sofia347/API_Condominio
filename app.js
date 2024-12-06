@@ -10,36 +10,36 @@ app.use(bodyParser.json());
 // Base de datos simulada
 let users = [
     {
-        id_user: 1,
+        id_usuario: 1,
         nombre: 'Laia',
-        apellidop: 'Nieves',
-        apellidom: 'Luna',
-        nocasa: 1,
+        apellido_pat: 'Nieves',
+        apellido_mat: 'Luna',
+        num_casa: 1,
         correo: 'lainilu@gmail.com',
         password: '123456',
-        telcasa: "4491572244",
+        tel_casa: "4491572244",
         cel: "4491572244"
     },
     {
-        id_user: 2,
+        id_usuario: 2,
         nombre: 'Fernando',
-        apellidop: 'Rojas',
-        apellidom: 'Ruiz',
-        nocasa: 2,
+        apellido_pat: 'Rojas',
+        apellido_mat: 'Ruiz',
+        no_casa: 2,
         correo: 'ferouz@gmail.com',
         password: 'hola12',
-        telcasa: "4491572275",
+        tel_casa: "4491572275",
         cel: "44915448215"
     },
     {
-        id_user: 3,
+        id_usuario: 3,
         nombre: 'Perla',
-        apellidop: 'Sanchez',
-        apellidom: 'Lopez',
-        nocasa: 2,
+        apellido_pat: 'Sanchez',
+        apellido_mat: 'Lopez',
+        no_casa: 2,
         correo: 'perlasa@hotmail.com',
         password: 'perla123',
-        telcasa: "4491572244",
+        tel_casa: "4491572244",
         cel: "4491572244"
     }
 ];
@@ -51,10 +51,10 @@ app.get('/users', (req, res) => {
 
 // Endpoint POST para recibir usuario y contraseña
 app.post('/users/login', (req, res) => {
-    const { id_user, password } = req.body; // Extraemos usuario y password del cuerpo de la solicitud
+    const { nombre, password } = req.body; // Extraemos usuario y password del cuerpo de la solicitud
 
     // Buscar el usuario en la lista de usuarios
-    const user = users.find(u => u.usuario === usuario && u.password === password);
+    const user = users.find(u => u.nombre === nombre && u.password === password);
 
     if (user) {
         // Si el usuario y la contraseña coinciden, devolvemos la información completa
