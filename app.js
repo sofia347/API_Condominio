@@ -44,11 +44,6 @@ let users = [
     }
 ];
 
-// Endpoint GET para obtener la lista de users
-app.get('/users', (req, res) => {
-    res.json(users);
-});
-
 // Endpoint POST para recibir correo y contraseña
 app.post('/users/login', (req, res) => {
     const { correo, password } = req.body;  // Extraemos correo y contraseña del cuerpo de la solicitud
@@ -69,15 +64,21 @@ app.post('/users/login', (req, res) => {
     // Compara las contraseñas (sin cifrado, solo para probar)
     if (user.password === password) {
         // Si las contraseñas coinciden, devolvemos la información del usuario
-        res.json(users);
+        res.json({
+            id_usuario: user.id_usuario,
+            nombre: user.nombre,
+            apellido_pat: user.apellido_pat,
+            apellido_mat: user.apellido_mat,
+            num_casa: user.num_casa,
+            correo: user.correo,
+            tel_casa: user.tel_casa,
+            cel: user.cel
+        });
     } else {
         // Si las contraseñas no coinciden
         return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
 });
-
-
-
 
 // Iniciar el servidor
 app.listen(port, () => {
