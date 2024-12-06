@@ -51,32 +51,31 @@ app.get('/users', (req, res) => {
 
 // Endpoint POST para recibir correo y contraseña
 app.post('/users/login', (req, res) => {
-    const { correo, password } = req.body; // Extraemos correo y password del cuerpo de la solicitud
+    const { correo, password } = req.body;  // Extraemos correo y contraseña del cuerpo de la solicitud
 
-    // Verificamos si los parámetros necesarios están presentes
+    // Asegurarnos de que ambos campos estén presentes
     if (!correo || !password) {
         return res.status(400).json({ message: 'Faltan credenciales' });
     }
 
-    // Buscar el usuario en la lista de usuarios (simulación de base de datos)
-    const user = users.find(u => u.correo === correo); 
+    // Buscar el usuario por correo
+    const user = users.find(u => u.correo === correo);
 
-    if (user) {
-        // Verificamos si la contraseña coincide con la almacenada (usando bcrypt)
-        bcrypt.compare(password, user.password, (err, result) => {
-            if (result) {
-                // Si la contraseña es correcta, devolvemos los datos del usuario
-                res.json(user);
-            } else {
-                // Si la contraseña es incorrecta
-                res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
-            }
-        });
-    } else {
+    if (!user) {
         // Si no se encuentra el usuario
-        res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
+        return res.status(401).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Compara las contraseñas (sin cifrado, solo para probar)
+    if (user.password === password) {
+        // Si las contraseñas coinciden, devolvemos la información del usuario
+        return res.json(user);
+    } else {
+        // Si las contraseñas no coinciden
+        return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
 });
+
 
 
 
