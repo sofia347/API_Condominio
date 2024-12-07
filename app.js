@@ -44,6 +44,18 @@ let users = [
     }
 ];
 
+let reservaciones = [
+    {
+        id_reservacion: 1,
+        horainicio: '08:00',
+        horacierre: '14:00',
+        cant_visit:  4,
+        id_servicio: 1,
+        fecha: '29-07-2024',
+        id_usuario: 2,
+    }
+];
+
 app.get('/users', (req, res) => {
     res.json(users);
 });
@@ -173,6 +185,10 @@ app.patch('/users/:id/password', (req, res) => {
             correo: user.correo
         }
     });
+});
+
+app.get('/reserva', (req, res) => {
+    res.json(reservaciones);
 });
 
 
