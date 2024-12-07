@@ -191,6 +191,72 @@ app.get('/reserva', (req, res) => {
     res.json(reservaciones);
 });
 
+// Endpoint POST para agregar una nueva reservación
+app.post('/reservaciones', (req, res) => {
+    const { id_reservacion, horainicio, horacierre, cant_visit, id_servicio, fecha, id_usuario } = req.body;
+
+    // Validamos que todos los campos estén presentes
+    if (!id_reservacion || !horainicio || !horacierre || !cant_visit || !id_servicio || !fecha || !id_usuario) {
+        return res.status(400).json({ message: 'Faltan datos para crear la reservación' });
+    }
+
+    // Verificamos que el ID de la reservación no exista ya
+    const reservationExists = reservaciones.find(r => r.id_reservacion === id_reservacion);
+    if (reservationExists) {
+        return res.status(409).json({ message: 'Ya existe una reservación con este ID' });
+    }
+
+    // Creamos la nueva reservación
+    const newReservation = { id_reservacion, horainicio, horacierre, cant_visit, id_servicio, fecha, id_usuario };
+    
+    // Agregamos la nueva reservación a la lista
+    reservaciones.push(newReservation);
+
+    res.status(201).json({ message: 'Reservación creada exitosamente', reservacion: newReservation });
+});
+
+// Endpoint PUT para actualizar una reservación
+app.put('/reservaciones/:id', (req, res) => {
+    const { id } = req.params; // ID de la reservación desde los parámetros de la URL
+    const updatedData = req.body; // Nuevos datos enviados en el cuerpo de la solicitud
+
+    // Buscamos la reservación por su ID
+    const reservationIndex = reservaciones.findIndex(r => r.id_reservacion === parseInt(id));
+
+    if (reservationIndex === -1) {
+        // Si no se encuentra la reservación
+        return res.status(404).json({ message: 'Reservación no encontrada' });
+    }
+
+    // Actualizamos solo los campos enviados en el cuerpo
+    reservaciones[reservationIndex] = { ...reservaciones[reservationIndex], ...updatedData };
+
+    // Enviamos la respuesta con los datos actualizados
+    res.json({
+        message: 'Reservación actualizada exitosamente',
+        reservacion: reservaciones[reservationIndex]
+    });
+});
+
+// Endpoint DELETE para eliminar una reservación
+app.delete('/reservaciones/:id', (req, res) => {
+    const { id } = req.params; // ID de la reservación desde los parámetros de la URL
+
+    // Buscamos la reservación por su ID
+    const reservationIndex = reservaciones.findIndex(r => r.id_reservacion === parseInt(id));
+
+    if (reservationIndex === -1) {
+        // Si no se encuentra la reservación
+        return res.status(404).json({ message: 'Reservación no encontrada' });
+    }
+
+    // Eliminamos la reservación
+    reservaciones.splice(reservationIndex, 1);
+
+    res.json({ message: 'Reservación eliminada exitosamente' });
+});
+
+
 
 // Iniciar el servidor
 app.listen(port, () => {
