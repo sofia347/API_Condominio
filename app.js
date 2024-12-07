@@ -65,6 +65,30 @@ let visitantes = [
     }
 ];
 
+let Morosos = [
+    {
+        id_moroso: 1,
+        casa: 4,
+        descripcion_fecha: "Enero 2024",
+        detalle: "Mantenimiento",
+        cantidad: 500
+    },
+    {
+        id_moroso: 2,
+        casa: 3,
+        descripcion_fecha: "Enero, Febrero 2024",
+        detalle: "Mantenimiento",
+        cantidad: 1000
+    },
+    {
+        id_moroso: 3,
+        casa: 1,
+        descripcion_fecha: "Abril 2024",
+        detalle: "Renta de inmobiliario",
+        cantidad: 350
+    }
+]
+
 app.get('/users', (req, res) => {
     res.json(users);
 });
