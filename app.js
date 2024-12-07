@@ -56,6 +56,15 @@ let reservaciones = [
     }
 ];
 
+let visitantes = [
+    {
+        id_visitante: 1,
+        num_visit: 4,
+        fecha_visit: '29-07-2024',
+        id_usuario: 2,
+    }
+];
+
 app.get('/users', (req, res) => {
     res.json(users);
 });
@@ -255,6 +264,76 @@ app.delete('/reservaciones/:id', (req, res) => {
 
     res.json({ message: 'Reservación eliminada exitosamente' });
 });
+
+app.get('/visitantes', (req, res) => {
+    res.json(visitantes);
+});
+
+// Endpoint POST para agregar un nuevo visitante
+app.post('/visitantes', (req, res) => {
+    const { id_visitante, num_visit, fecha_visit, id_usuario } = req.body;
+
+    // Validamos que todos los campos estén presentes
+    if (!id_visitante || !num_visit || !fecha_visit || !id_usuario) {
+        return res.status(400).json({ message: 'Faltan datos para crear el visitante' });
+    }
+
+    // Verificamos que el ID del visitante no exista ya
+    const visitanteExists = visitantes.find(v => v.id_visitante === id_visitante);
+    if (visitanteExists) {
+        return res.status(409).json({ message: 'Ya existe un visitante con este ID' });
+    }
+
+    // Creamos el nuevo visitante
+    const newVisitante = { id_visitante, num_visit, fecha_visit, id_usuario };
+
+    // Agregamos el nuevo visitante a la lista
+    visitantes.push(newVisitante);
+
+    res.status(201).json({ message: 'Visitante creado exitosamente', visitante: newVisitante });
+});
+
+// Endpoint PUT para actualizar un visitante
+app.put('/visitantes/:id', (req, res) => {
+    const { id } = req.params; // ID del visitante desde los parámetros de la URL
+    const updatedData = req.body; // Nuevos datos enviados en el cuerpo de la solicitud
+
+    // Buscamos el visitante por su ID
+    const visitanteIndex = visitantes.findIndex(v => v.id_visitante === parseInt(id));
+
+    if (visitanteIndex === -1) {
+        // Si no se encuentra el visitante
+        return res.status(404).json({ message: 'Visitante no encontrado' });
+    }
+
+    // Actualizamos solo los campos enviados en el cuerpo
+    visitantes[visitanteIndex] = { ...visitantes[visitanteIndex], ...updatedData };
+
+    // Enviamos la respuesta con los datos actualizados
+    res.json({
+        message: 'Visitante actualizado exitosamente',
+        visitante: visitantes[visitanteIndex]
+    });
+});
+
+// Endpoint DELETE para eliminar un visitante
+app.delete('/visitantes/:id', (req, res) => {
+    const { id } = req.params; // ID del visitante desde los parámetros de la URL
+
+    // Buscamos el visitante por su ID
+    const visitanteIndex = visitantes.findIndex(v => v.id_visitante === parseInt(id));
+
+    if (visitanteIndex === -1) {
+        // Si no se encuentra el visitante
+        return res.status(404).json({ message: 'Visitante no encontrado' });
+    }
+
+    // Eliminamos el visitante
+    visitantes.splice(visitanteIndex, 1);
+
+    res.json({ message: 'Visitante eliminado exitosamente' });
+});
+
 
 
 
