@@ -558,7 +558,6 @@ app.get('/reporte', (req, res) => {
     res.json(reporte);
 });
 
-
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
