@@ -44,9 +44,9 @@ let users = [
     }
 ];
 
-app.get('/users'), (req, res) => {
+app.get('/users', (req, res) => {
     res.json(users);
-}
+});
 
 // Endpoint POST para recibir correo y contraseña
 app.post('/users/login', (req, res) => {
