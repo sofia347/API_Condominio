@@ -44,6 +44,10 @@ let users = [
     }
 ];
 
+app.get('/users'), (req, res) => {
+    res.json(users);
+}
+
 // Endpoint POST para recibir correo y contraseña
 app.post('/users/login', (req, res) => {
     const { correo, password } = req.body;  // Extraemos correo y contraseña del cuerpo de la solicitud
@@ -79,6 +83,36 @@ app.post('/users/login', (req, res) => {
         // Si las contraseñas no coinciden
         return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
+});
+
+// Endpoint POST para agregar un nuevo usuario
+app.post('/users/insert', (req, res) => {
+    const { id_usuario, nombre, apellido_pat, apellido_mat, num_casa, correo, password, tel_casa, cel } = req.body;
+
+    if (!id_usuario || !nombre || !apellido_pat || !apellido_mat || !num_casa || !correo || !password || !tel_casa || !cel) {
+        return res.status(400).json({ message: 'Faltan datos para crear el usuario' });
+    }
+
+    const userExists = users.find(u => u.correo === correo);
+    if (userExists) {
+        return res.status(409).json({ message: 'El correo ya está registrado' });
+    }
+
+    const newUser = {
+        id_usuario,
+        nombre,
+        apellido_pat,
+        apellido_mat,
+        num_casa,
+        correo,
+        password,
+        tel_casa,
+        cel
+    };
+
+    users.push(newUser);
+
+    res.status(201).json({ message: 'Usuario creado exitosamente', user: newUser });
 });
 
 // Iniciar el servidor
