@@ -71,6 +71,7 @@ app.post('/users/login', (req, res) => {
             apellido_mat: user.apellido_mat,
             num_casa: user.num_casa,
             correo: user.correo,
+            password: user.password,
             tel_casa: user.tel_casa,
             cel: user.cel
         });
