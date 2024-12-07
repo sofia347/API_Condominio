@@ -65,7 +65,7 @@ let visitantes = [
     }
 ];
 
-let Morosos = [
+let morosos = [
     {
         id_moroso: 1,
         casa: 4,
@@ -86,8 +86,150 @@ let Morosos = [
         descripcion_fecha: "Abril 2024",
         detalle: "Renta de inmobiliario",
         cantidad: 350
+    },
+    {
+        id_moroso: 4,
+        casa: 2,
+        descripcion_fecha: "Diciembre 2023",
+        detalle: "Reparación",
+        cantidad: 300
+    },
+    {
+        id_moroso: 5,
+        casa: 6,
+        descripcion_fecha: "Diciembre 2024",
+        detalle: "Servicios baños",
+        cantidad: 150
+    },
+    {
+        id_moroso: 6,
+        casa: 4,
+        descripcion_fecha: "Junio 2023",
+        detalle: "Mantenimiento",
+        cantidad: 500
+    },
+    {
+        id_moroso: 7,
+        casa: 7,
+        descripcion_fecha: "Junio, Julio 2023",
+        detalle: "Mantenimiento",
+        cantidad: 1000
+    },
+    {
+        id_moroso: 8,
+        casa: 12,
+        descripcion_fecha: "Mayo 2024",
+        detalle: "Otros Adeudos",
+        cantidad: 450
+    },
+    {
+        id_moroso: 9,
+        casa: 11,
+        descripcion_fecha: "Septiembre 2024",
+        detalle: "Recargos",
+        cantidad: 150
+    },
+    {
+        id_moroso: 10,
+        casa: 14,
+        descripcion_fecha: "Octubre 2024",
+        detalle: "Mantenimiento",
+        cantidad: 500
     }
 ]
+
+let avisos = [
+    {
+        id_aviso: 1,
+        tipo_aviso: "Aviso general",
+        titulo: "Ejemplo de Aviso 1",
+        fecha: "31 de octubre del 2024",
+        descripcion: "La alberca entrara en mantenimiento debido a fallas constantes en los filtros. Se espera que las reparaciones no pasen de dos semanas"
+    },
+    {
+        id_aviso: 2,
+        tipo_aviso: "Aviso para la calle ###",
+        titulo: "Ejemplo de Aviso 2",
+        fecha: "3 de noviembre del 2024",
+        descripcion: "Se informa a los habitantes de la calle ###, que habra una fiesta de Halloween en la casa ##. La cual se acabara a las 12 am del dia siguiente."
+    },
+    {
+        id_aviso: 3,
+        tipo_aviso: "Aviso informativo",
+        titulo: "Ejemplo de Aviso 3",
+        fecha: "20 de noviembre del 2024",
+        descripcion: "Por motivos de dia festivos, el dia de hoy no se recogera la basura hasta mañana, para que tomen sus precauciones y no saquen la basura."
+    },
+    {
+        id_aviso: 4,
+        tipo_aviso: "Aviso general",
+        titulo: "Ejemplo de Aviso 4",
+        fecha: "1 de noviembre el 2024",
+        descripcion: "La mesa directiva actual invita a todos los niños disfrazados para pedir dulces, a participar en una dinamica para el convivio del condominio a las 20:00 hrs."
+    },
+]
+
+let mantenimiento = [
+    {
+        M_folio: 101,
+        casa: 5,
+        nombre: "Jose de Jesus Diaz",
+        mes: "Marzo 2024",
+        cantidad: 500,
+        transferencia: true
+    },
+    {
+        M_folio: 102,
+        casa: 6,
+        nombre: "Margarita Covarrubias",
+        mes: "Marzo 2024",
+        cantidad: 500,
+        transferencia: false
+    },
+    {
+        M_folio: 103,
+        casa: 8,
+        nombre: "Maria Guadalupe del Rosario",
+        mes: "Marzo 2024",
+        cantidad: 475,
+        transferencia: false
+    }
+]
+
+let ingreso_reserva = [
+    {
+        R_folio: 201,
+        casa: 8,
+        descripcion: "Alberca",
+        fecha: "01-10-2024",
+        cantidad: 300,
+        transferencia: false
+    },
+    {
+        R_folio: 202,
+        casa: 11,
+        descripcion: "Sala de eventos",
+        fecha: "24-12-2024",
+        cantidad: 2500,
+        transferencia: true
+    }
+]
+
+let egreso = [
+    {
+        E_folio: 301,
+        descripcion: "Gasolina para podadora",
+        fecha: "12-03-2024",
+        cantidad: 300
+    },
+    {
+        E_folio: 302,
+        descripcion: "Pago de jardineria",
+        fecha: "20-03-2024",
+        cantidad: 3000
+    }
+]
+
 
 app.get('/users', (req, res) => {
     res.json(users);
@@ -356,6 +498,26 @@ app.delete('/visitantes/:id', (req, res) => {
     visitantes.splice(visitanteIndex, 1);
 
     res.json({ message: 'Visitante eliminado exitosamente' });
+});
+
+app.get('/morosos', (req, res) => {
+    res.json(morosos);
+});
+
+app.get('/avisos', (req, res) => {
+    res.json(avisos);
+});
+
+app.get('/mantenimiento', (req, res) => {
+    res.json(mantenimiento);
+});
+
+app.get('/mantenimiento', (req, res) => {
+    res.json(ingreso_reserva);
+});
+
+app.get('/mantenimiento', (req, res) => {
+    res.json(egreso);
 });
 
 
