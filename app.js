@@ -335,8 +335,6 @@ app.delete('/visitantes/:id', (req, res) => {
 });
 
 
-
-
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
