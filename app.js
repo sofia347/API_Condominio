@@ -56,6 +56,29 @@ let reservaciones = [
     }
 ];
 
+let servicios = [
+    {
+        id_servicio: 1,
+        nombre_servicio: "baños",
+        precio_servicio: 100
+    },
+    {
+        id_servicio: 2,
+        nombre_servicio: "palapa",
+        precio_servicio: 500
+    },
+    {
+        id_servicio: 3,
+        nombre_servicio: "salón",
+        precio_servicio: 1500
+    },
+    {
+        id_servicio: 4,
+        nombre_servicio: "alberca",
+        precio_servicio: 1000
+    }
+]
+
 let visitantes = [
     {
         id_visitante: 1,
@@ -429,6 +452,10 @@ app.delete('/reservaciones/:id', (req, res) => {
     reservaciones.splice(reservationIndex, 1);
 
     res.json({ message: 'Reservación eliminada exitosamente' });
+});
+
+app.get('/servicios', (req, res) => {
+    res.json(servicios);
 });
 
 app.get('/visitantes', (req, res) => {
