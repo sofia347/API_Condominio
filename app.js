@@ -508,15 +508,15 @@ app.get('/avisos', (req, res) => {
     res.json(avisos);
 });
 
-app.get('/mantenimiento', (req, res) => {
+app.get('/ingreso/mantenimiento', (req, res) => {
     res.json(mantenimiento);
 });
 
-app.get('/mantenimiento', (req, res) => {
+app.get('/ingreso/reserva', (req, res) => {
     res.json(ingreso_reserva);
 });
 
-app.get('/mantenimiento', (req, res) => {
+app.get('/egreso', (req, res) => {
     res.json(egreso);
 });
 
