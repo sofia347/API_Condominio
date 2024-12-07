@@ -115,6 +115,67 @@ app.post('/users/insert', (req, res) => {
     res.status(201).json({ message: 'Usuario creado exitosamente', user: newUser });
 });
 
+// Endpoint PUT para actualizar la información de un usuario
+app.put('/users/:id', (req, res) => {
+    const { id } = req.params; // Extraemos el ID del usuario desde los parámetros de la URL
+    const updatedData = req.body; // Nuevos datos enviados en el cuerpo de la solicitud
+
+    // Buscar el usuario por su ID
+    const userIndex = users.findIndex(u => u.id_usuario === parseInt(id));
+
+    if (userIndex === -1) {
+        // Si el usuario no existe
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Actualizamos solo los campos enviados en el cuerpo
+    users[userIndex] = { ...users[userIndex], ...updatedData };
+
+    // Enviamos la respuesta con los datos actualizados
+    res.json({
+        message: 'Usuario actualizado exitosamente',
+        user: users[userIndex]
+    });
+});
+
+// Endpoint PATCH para actualizar la contraseña de un usuario
+app.patch('/users/:id/password', (req, res) => {
+    const { id } = req.params; // ID del usuario desde los parámetros de la URL
+    const { currentPassword, newPassword } = req.body; // Contraseña actual y nueva contraseña del cuerpo de la solicitud
+
+    // Validar que ambas contraseñas estén presentes
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ message: 'Debe proporcionar la contraseña actual y la nueva contraseña' });
+    }
+
+    // Buscar el usuario por su ID
+    const user = users.find(u => u.id_usuario === parseInt(id));
+
+    if (!user) {
+        // Si el usuario no existe
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Validar la contraseña actual
+    if (user.password !== currentPassword) {
+        return res.status(401).json({ message: 'La contraseña actual es incorrecta' });
+    }
+
+    // Actualizar la contraseña
+    user.password = newPassword;
+
+    // Responder con éxito
+    res.json({
+        message: 'Contraseña actualizada exitosamente',
+        user: {
+            id_usuario: user.id_usuario,
+            nombre: user.nombre,
+            correo: user.correo
+        }
+    });
+});
+
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
