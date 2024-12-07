@@ -50,34 +50,11 @@ let reservaciones = [
         horainicio: '08:00',
         horacierre: '14:00',
         cant_visit:  4,
-        id_servicio: 1,
+        servicio: "baños",
         fecha: '29-07-2024',
         id_usuario: 2,
     }
 ];
-
-let servicios = [
-    {
-        id_servicio: 1,
-        nombre_servicio: "baños",
-        precio_servicio: 100
-    },
-    {
-        id_servicio: 2,
-        nombre_servicio: "palapa",
-        precio_servicio: 500
-    },
-    {
-        id_servicio: 3,
-        nombre_servicio: "salón",
-        precio_servicio: 1500
-    },
-    {
-        id_servicio: 4,
-        nombre_servicio: "alberca",
-        precio_servicio: 1000
-    }
-]
 
 let visitantes = [
     {
@@ -92,70 +69,70 @@ let morosos = [
     {
         id_moroso: 1,
         casa: 4,
-        descripcion_fecha: "Enero 2024",
+        descripcion: "Enero 2024",
         detalle: "Mantenimiento",
         cantidad: 500
     },
     {
         id_moroso: 2,
         casa: 3,
-        descripcion_fecha: "Enero, Febrero 2024",
+        descripcion: "Enero, Febrero 2024",
         detalle: "Mantenimiento",
         cantidad: 1000
     },
     {
         id_moroso: 3,
         casa: 1,
-        descripcion_fecha: "Abril 2024",
+        descripcion: "Abril 2024",
         detalle: "Renta de inmobiliario",
         cantidad: 350
     },
     {
         id_moroso: 4,
         casa: 2,
-        descripcion_fecha: "Diciembre 2023",
+        descripcion: "Diciembre 2023",
         detalle: "Reparación",
         cantidad: 300
     },
     {
         id_moroso: 5,
         casa: 6,
-        descripcion_fecha: "Diciembre 2024",
+        descripcion: "Diciembre 2024",
         detalle: "Servicios baños",
         cantidad: 150
     },
     {
         id_moroso: 6,
         casa: 4,
-        descripcion_fecha: "Junio 2023",
+        descripcion: "Junio 2023",
         detalle: "Mantenimiento",
         cantidad: 500
     },
     {
         id_moroso: 7,
         casa: 7,
-        descripcion_fecha: "Junio, Julio 2023",
+        descripcion: "Junio, Julio 2023",
         detalle: "Mantenimiento",
         cantidad: 1000
     },
     {
         id_moroso: 8,
         casa: 12,
-        descripcion_fecha: "Mayo 2024",
+        descripcion: "Mayo 2024",
         detalle: "Otros Adeudos",
         cantidad: 450
     },
     {
         id_moroso: 9,
         casa: 11,
-        descripcion_fecha: "Septiembre 2024",
+        descripcion: "Septiembre 2024",
         detalle: "Recargos",
         cantidad: 150
     },
     {
         id_moroso: 10,
         casa: 14,
-        descripcion_fecha: "Octubre 2024",
+        descripcion: "Octubre 2024",
         detalle: "Mantenimiento",
         cantidad: 500
     }
@@ -219,7 +196,7 @@ let mantenimiento = [
     }
 ]
 
-let ingreso_reserva = [
+let ingre_reserva = [
     {
         R_folio: 201,
         casa: 8,
@@ -250,6 +227,36 @@ let egreso = [
         descripcion: "Pago de jardineria",
         fecha: "20-03-2024",
         cantidad: 3000
+    }
+]
+
+let reporte = [
+    {
+        id_reporte: 1,
+        casa: 2,
+        mensaje: "Una carro versa negro con placas del DF esta estorbando mi entrada",
+        id_usuario: 2
+    },
+    {
+        id_reporte: 2,
+        casa: 12,
+        mensaje: "Los servicios de basura, va una semana que no se llevan la mia",
+        id_usuario: 3
+    },
+    {
+        id_reporte: 3,
+        casa: 7,
+        mensaje: "El dia de ayer en la madrugada vi como los de la casa 5 fueron y aventaron basura a la casa 8",
+        id_usuario: 1
+    }
+]
+
+let pagos = [1
+    {
+        id_pago: 1,
+        descripcion_pago: "Servicios",
+        metodo_pago: "Referencia bancaria",
+        id_reservacion: 1
     }
 ]
 
@@ -454,10 +461,6 @@ app.delete('/reservaciones/:id', (req, res) => {
     res.json({ message: 'Reservación eliminada exitosamente' });
 });
 
-app.get('/servicios', (req, res) => {
-    res.json(servicios);
-});
-
 app.get('/visitantes', (req, res) => {
     res.json(visitantes);
 });
@@ -540,11 +543,19 @@ app.get('/ingreso/mantenimiento', (req, res) => {
 });
 
 app.get('/ingreso/reserva', (req, res) => {
-    res.json(ingreso_reserva);
+    res.json(ingre_reserva);
 });
 
 app.get('/egreso', (req, res) => {
     res.json(egreso);
+});
+
+app.get('/pagos', (req, res) => {
+    res.json(pagos);
+});
+
+app.get('/reporte', (req, res) => {
+    res.json(reporte);
 });
 
 
