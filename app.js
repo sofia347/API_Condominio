@@ -76,9 +76,65 @@ let morosos = [
     {
         id_moroso: 2,
         casa: 3,
-        descripcion: "Enero, Febrero 2024",
+        descripcion: "Febrero 2024",
         detalle: "Mantenimiento",
         cantidad: 1000
+    },
+    {
+        id_moroso: 3,
+        casa: 1,
+        descripcion: "Abril 2024",
+        detalle: "Renta de inmobiliario",
+        cantidad: 350
+    },
+    {
+        id_moroso: 4,
+        casa: 2,
+        descripcion: "Diciembre 2023",
+        detalle: "Reparación",
+        cantidad: 300
+    },
+    {
+        id_moroso: 5,
+        casa: 6,
+        descripcion: "Diciembre 2024",
+        detalle: "Servicios baños",
+        cantidad: 150
+    },
+    {
+        id_moroso: 6,
+        casa: 4,
+        descripcion: "Junio 2023",
+        detalle: "Mantenimiento",
+        cantidad: 500
+    },
+    {
+        id_moroso: 7,
+        casa: 7,
+        descripcion: "Junio, Julio 2023",
+        detalle: "Mantenimiento",
+        cantidad: 1000
+    },
+    {
+        id_moroso: 8,
+        casa: 12,
+        descripcion: "Mayo 2024",
+        detalle: "Otros Adeudos",
+        cantidad: 450
+    },
+    {
+        id_moroso: 9,
+        casa: 11,
+        descripcion: "Septiembre 2024",
+        detalle: "Recargos",
+        cantidad: 150
+    },
+    {
+        id_moroso: 10,
+        casa: 14,
+        descripcion: "Octubre 2024",
+        detalle: "Mantenimiento",
+        cantidad: 500
     }
 ];
 
