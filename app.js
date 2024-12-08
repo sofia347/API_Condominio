@@ -136,7 +136,7 @@ let morosos = [
         detalle: "Mantenimiento",
         cantidad: 500
     }
-]
+];
 
 let avisos = [
     {
@@ -167,7 +167,7 @@ let avisos = [
         fecha: "1 de noviembre el 2024",
         descripcion: "La mesa directiva actual invita a todos los niños disfrazados para pedir dulces, a participar en una dinamica para el convivio del condominio a las 20:00 hrs."
     },
-]
+];
 
 let mantenimiento = [
     {
@@ -194,7 +194,7 @@ let mantenimiento = [
         cantidad: 475,
         transferencia: false
     }
-]
+];
 
 let ingre_reserva = [
     {
@@ -213,7 +213,7 @@ let ingre_reserva = [
         cantidad: 2500,
         transferencia: true
     }
-]
+];
 
 let egreso = [
     {
@@ -228,7 +228,7 @@ let egreso = [
         fecha: "20-03-2024",
         cantidad: 3000
     }
-]
+];
 
 let reporte = [
     {
@@ -249,16 +249,16 @@ let reporte = [
         mensaje: "El dia de ayer en la madrugada vi como los de la casa 5 fueron y aventaron basura a la casa 8",
         id_usuario: 1
     }
-]
+];
 
-let pagos = [1
+let pagos = [
     {
         id_pago: 1,
         descripcion_pago: "Servicios",
         metodo_pago: "Referencia bancaria",
         id_reservacion: 1
     }
-]
+];
 
 
 app.get('/users', (req, res) => {
