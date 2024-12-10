@@ -558,7 +558,7 @@ app.get('/reporte', (req, res) => {
     res.json(reporte);
 });
 
-// Iniciar el servidor
+// Iniciar el servidor remoto
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
 });
